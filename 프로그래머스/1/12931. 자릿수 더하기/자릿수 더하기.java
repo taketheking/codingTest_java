@@ -5,11 +5,9 @@ public class Solution {
         int answer = 0;
         
         while(true){
-            if(n/10 != 0){
-                answer += n%10;
-            }
-            else{
-                answer += n;
+            answer += n%10;
+            
+            if(n < 10){
                 break;
             }
             
