@@ -6,11 +6,13 @@ class Solution {
 
         int[] scores = new int[3];
 
+        // 수포자들 정답 찍기 방법
         int[] supoza1 = {1, 2, 3, 4, 5};
         int[] supoza2 = {2, 1, 2, 3, 2, 4, 2, 5};
         int[] supoza3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
 
 
+        // 점수 계산
         for(int i = 0; i < answers.length; i++) {
 
             if(answers[i] == supoza1[i%supoza1.length]) {
@@ -25,38 +27,32 @@ class Solution {
                 scores[2]++;
             }
         }
-
-        if(scores[0] > scores[1]) {
-            if(scores[0] > scores[2]) {
-                return new int[]{1};
-            } else if (scores[0] == scores[2]) {
-                return new int[]{1, 3};
-            }
-            else {
-                return new int[]{3};
+        
+        // 가장 높은 점수 확인
+        int max = 0;
+        
+        for(int i = 0; i < scores.length; i++) {
+            if(scores[i] > max) {
+                max = scores[i];
             }
         }
-        else if (scores[0] == scores[1]){
-            if(scores[0] > scores[2]) {
-                return new int[]{1, 2};
-            } else if (scores[0] == scores[2]) {
-                return new int[]{1, 2, 3};
-            }
-            else {
-                return new int[]{3};
-            }
-        }
-        else {
-            if(scores[1] > scores[2]) {
-                return new int[]{2};
-            }
-            else if (scores[1] == scores[2]) {
-                return new int[]{2,3};
-            }
-            else {
-                return new int[]{3};
+        
+        // 가장 높은 점수 번호 담기
+        List<Integer> list = new ArrayList<>();
+        
+        for(int i = 0; i < scores.length; i++) {
+            if(scores[i] == max) {
+                list.add(i+1);
             }
         }
+        
+        // 리스트->배열 변환
+        int[] answer = new int[list.size()];
+        for(int i = 0; i < list.size(); i++) {
+            answer[i] = list.get(i);
+        }
+        
+        return answer;
     }
     
     public int[] solution2(int[] answers) {
